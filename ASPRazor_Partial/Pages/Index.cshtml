@@ -1,0 +1,60 @@
+﻿@page
+@using ASPRazor_Partial
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+   ViewData["titlename"] = "Chao ban";
+   ViewData["content"] = "Day la trang san pham";
+}
+
+<form method="post">
+<label>Nhap ten cua ban</label>
+<input name="username" type="text"/>
+<input type="submit" value="Gui"/>
+</form>
+
+@await Component.InvokeAsync("ProductBox",true)
+@await Html.PartialAsync("_Message")
+<div class="text-center">
+    <h1 class="display-4">Welcome Tran Dinh Khanh</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@{
+    var product1 = new Product() {Name = "IphoneX",Description="Dien thoai iphone",Price = 20000};
+    var product2 = new Product() {Name = "Samsung S22 ",Description="Dien thoai samsung",Price = 15000};
+    var product3 = new Product() {Name = "Nokia",Description="Dien thoai nokia",Price = 5000};
+
+}
+<div class="row bg-dark ">
+<div class="col">
+<partial name="_ProductItem" model="product1"/>
+</div>
+<div class="col">
+@await Html.PartialAsync("_ProductItem",product2)
+</div>
+<div class="col">
+@{
+    await Html.RenderPartialAsync("_ProductItem",product3);
+}
+</div>
+</div>
+<div class="row bg-warning">
+@{
+    var products = new List<Product>(){
+        new Product(){Name = "San pham 1",Description = "Mo ta san pham 1",Price = 12300},
+        new Product(){Name = "San pham 2",Description = "Mo ta san pham 2",Price = 12300},
+        new Product(){Name = "San pham 3",Description = "Mo ta san pham 3",Price = 12300},
+        new Product(){Name = "San pham 4",Description = "Mo ta san pham 4",Price = 12300},
+        };
+
+        foreach(var item in products){
+            <div class="col m-3">
+          <partial name="_ProductItem" model="item"/>
+          </div>
+        }
+}
+</div>
+
+
+

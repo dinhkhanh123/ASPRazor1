@@ -1,0 +1,79 @@
+﻿@*
+@bieuthuc() : -> HTML (encode) < -> &lt , >->&gt
+-Html.Raw (string)
+@{
+code c#
+mo the <html></html> -> xuat html
+-phuong thuc cuc bo
+-<text>
+-@:
+@if,for,foreach,...
+-@function(){
+Member : method,Field,Property
+}
+@page "url"
+@Model Model
+@namespace
+@using
+}
+*@
+@page "/trang-chu"
+
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var xinchao = "<h1 class='alert alert-danger'>Xin chao cac ban</h1>";
+}
+
+<div class="text-center text-danger">
+    <h1 class="display-4">Home Page - @this.Title</h1>
+    <h2>Cu Phap Razor</h2>
+    @("<h1>Xin chao cac ban</h1>")
+    <p>@Model.Abc</p>
+    @Html.Raw(xinchao)
+    @{
+        var loichao = "Xin chao";
+        var age = 20;
+
+        void Xinchao(string name)
+        {
+            var msg = loichao + " " + name;
+            <p>@msg</p>
+        }
+
+        @if (age > 18)
+        {
+            <p>Ban @age tuoi duoc truy cap</p>
+        }
+        else
+        {
+            <p>Ban @age ko duoc truy cap</p>
+        }
+    }
+
+    @functions {
+        string Title { set; get; } = "Tran dinh khanh";
+    }
+
+    <p>@loichao</p>
+    @{
+        Xinchao("TranDinhKhanh");
+
+        string[] cacsanpham = new string[] { "phone", "laptop", "ipod", "book" };
+        foreach (var name in cacsanpham)
+        {
+            <p>@name</p>
+
+            @* <br>
+    <text>@name</text>
+
+    <br>
+    @:[@name] *@
+
+
+        }
+    }
+
+
+</div>
+
